@@ -16,7 +16,7 @@ require_once "../function/connection.php";
 			session_start();
 			$result = mysqli_fetch_assoc($query);
 			$_SESSION['username']=$result['username'];
-			header("location:../views/tampilandata.php");
+			header("location:../views/index.php");
 		}else{
 			echo "Password salah";
 			echo "<meta http-equiv='Refresh' content='1; URL=../views/login.php'>";

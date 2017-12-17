@@ -12,11 +12,19 @@ if (!isset($_SESSION['username'])) {
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>Data</title>
+		<style>
+			footer {
+		      background-color: #555;
+		      color: white;
+		      padding: 15px;
+		    }
+		    .row.content {height:530px;}
+		</style>
 	</head>
 	<body>
 		<?php require_once 'template/header.php' ?>
-		<div class="container" style="margin-top:60px">
-			<div class="row">
+		<div class="container" style="margin-top:15px">
+			<div class="row content">
 				<table id="myTable" class="table table-stripped table-bordered table-hover" width="100%">
 					<thead>
 						<tr>
@@ -45,7 +53,8 @@ if (!isset($_SESSION['username'])) {
 								<td><?php echo $data['status']; ?></td>
 								<td><?php echo $data['warga']; ?></td>
 								<td class="text-center">
-									<a href="" title="Edit Data" data-toggle="tooltip" class="disabled btn btn-default btn-s"><span class="fa fa-pencil"> Edit</span></a>
+									<!-- <a href="#edit" title="Edit Data" data-toggle="modal" class="btn btn-default btn-s"><span class="fa fa-pencil"> Edit</span></a> -->
+									<a href="edit.php?nik=<?php echo $data['nik']; ?>" title="Edit Data" data-toggle="tooltip" class="btn btn-default btn-s"><span class="fa fa-pencil"> Edit</span></a>
 									<a href="../function/delete.php?nik=<?php echo $data['nik']; ?>" onclick="return confirm('Data <?php echo $data['nama']; ?> Akan Dihapus');" title="Hapus Data" data-toggle="tooltip" class="btn btn-danger btn-s"><span class="fa fa-trash"> Delete</span></a>
 								</td>
 							</tr>
@@ -78,68 +87,7 @@ if (!isset($_SESSION['username'])) {
 					<div class="modal-body">
 						<div class="fetched-data">
 						<h4 class="modal-title">Tambah Data</h4>
-							<form method="POST" action="../function/add.php">
-								<div class="table-responsive">
-									<table class="table">
-										<tr>
-											<td>NIK</td>
-											<td>: <input type="text" name="nik" required=""></td>
-										</tr><br>
-										<tr>
-											<td>Nama</td>
-											<td>: <input type="text" name="nama" required=""></td>
-										</tr>
-										<tr>
-											<td>Alamat</td>
-											<td>: <input type="text" name="alamat" required=""></td>
-										</tr>
-										<tr>
-											<td>Tempat Lahir</td>
-											<td>: <input type="text" name="tmptlahir" required=""></td>
-										</tr>
-										<tr>
-											<td>Tanggal Lahir</td>
-											<td>: <input type="date" name="tgllahir" required=""></td>
-										</tr>
-										<tr>
-											<td>Agama</td>
-											<td>: <select name="agama" required="">
-													<option value="">--</option>
-													<option value="Islam">Islam</option>	
-													<option value="Kristen">Kristen</option>
-													<option value="Katolik">Katolik</option>
-													<option value="Hindu">Hindu</option>
-													<option value="Buddha">Buddha</option>
-													<option value="Kong Hu Cu">Kong Hu Cu</option>
-												  </select></td>
-										</tr>
-										<tr>
-											<td>Status</td>
-											<td>: 
-												<select name="status" required="">
-													<option value="">--</option>
-													<option value="Belum Kawin">Belum Kawin</option>	
-													<option value="Kawin">Kawin</option>
-												</select>
-											</td>
-										</tr>
-										<tr>
-											<td>Kewarganegaraan</td>
-											<td>: 
-												<select name="warga" required="">
-													<option value="">--</option>
-													<option value="WNI">WNI</option>
-													<option value="WNA">WNA</option>	
-												</select>
-											</td>
-										</tr>
-										<tr>
-											<td><input type="submit" name="add" value="Tambah Data" class="btn btn-success btn-sm"></td>
-											<td></td>
-										</tr>
-									</table>
-								</div>
-							</form>
+							<?php require_once 'tambahdata.php';?>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -148,5 +96,26 @@ if (!isset($_SESSION['username'])) {
 		            </div>
 			</div>
 		</div>
+		<div class="modal fade" id="edit<?php echo $data['nik']; ?>">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="fetched-data">
+						<h4 class="modal-title">Ubah Data</h4>
+							<?php require_once'edit.php';?>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
+					</div>
+		            </div>
+			</div>
+		</div>
+		<footer class="container-fluid text-right">
+		  Powered By<a href="https://web.facebook.com/Hans.lnside" target="_blank"> HansJr</a>
+		</footer>
 	</body>
 </html>

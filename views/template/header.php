@@ -5,11 +5,14 @@
 <link href="additional/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="additional/bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet">
 <link href="additional/bootstrap/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
-
+<?php
+require_once '../function/connection.php'; 
+session_start();
+?>
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
 		<ul class="nav navbar-nav">
-			<li class="disabled"><a href="#">Home</a></li>
+			<li><a href="index.php">Home</a></li>
 			<li><a href="tampilandata.php" >Lihat Data</a></li>
 			<li class="disabled"><a href="#">About Me</a></li>
 		</ul>
