@@ -20,13 +20,13 @@ require_once 'template/header.php';
 	$status   = array('--','Belum Kawin','Kawin');
 	$warga    = array('--','WNI','WNA');
 	$NIK 	= $_GET['nik'];
-	$sql 	= "SELECT * FROM tb_datapenduduk WHERE nik=$_GET[nik]";
+	$sql 	= "SELECT * FROM tb_datapenduduk WHERE nik=$NIK";
 	$query 	= mysqli_query($connect,$sql);
 	while($data = mysqli_fetch_assoc($query)) :
 	?>
 	<div class="modal-body">
-						<div class="fetched-data">
-						<h4 class="modal-title">Tambah Data</h4>
+		<div class="fetched-data">
+		<h4 class="modal-title">Tambah Data</h4>
 	<form method="POST" action="../function/update.php">
 		<div class="table-responsive">
 			<table class="table">
