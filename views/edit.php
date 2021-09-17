@@ -19,45 +19,53 @@ require_once 'template/header.php';
 	$agama    = array('--','Islam','Kristen','Katolik','Hindu','Buddha','Kong Hu Cu');
 	$status   = array('--','Belum Kawin','Kawin');
 	$warga    = array('--','WNI','WNA');
-	$NIK 	= $_GET['nik'];
-	$sql 	= "SELECT * FROM tb_datapenduduk WHERE nik=$NIK";
-	$query 	= mysqli_query($connect,$sql);
-	while($data = mysqli_fetch_assoc($query)) :
+	$sql 	= $connect->prepare("SELECT * FROM tb_datapenduduk WHERE nik = ?");
+	$sql->bind_param("s",$nik);
+
+	$nik 	= $_GET['nik'];
+
+	$sql->execute();
+
+	$data = $sql->get_result()->fetch_assoc();
+
+	$sql->close();
+	$connect->close();
+
 	?>
 	<div class="modal-body">
 		<div class="fetched-data">
-		<h4 class="modal-title">Tambah Data</h4>
+		<h4 class="modal-title">Edit Data</h4>
 	<form method="POST" action="../function/update.php">
 		<div class="table-responsive">
 			<table class="table">
 				<tr>
 					<td width="13%">NIK</td>
-					<td>: <input type="text" name="nik" value="<?php echo $data['nik']; ?>"></td>
+					<td>: <input type="text" name="nik" value="<?= $data['nik']; ?>"></td>
 				</tr><br>
 				<tr>
 					<td>Nama</td>
-					<td>: <input type="text" name="nama" value="<?php echo $data['nama']; ?>"></td>
+					<td>: <input type="text" name="nama" value="<?= $data['nama']; ?>"></td>
 				</tr>
 				<tr>
 					<td>Alamat</td>
-					<td>: <input type="text" name="alamat" value="<?php echo $data['alamat']; ?>"></td>
+					<td>: <input type="text" name="alamat" value="<?= $data['alamat']; ?>"></td>
 				</tr>
 				<tr>
 					<td>Tempat Lahir</td>
-					<td>: <input type="text" name="tmptlahir" value="<?php echo $data['tmptlahir']; ?>"></td>
+					<td>: <input type="text" name="tmptlahir" value="<?= $data['tmptlahir']; ?>"></td>
 				</tr>
 				<tr>
 					<td>Tanggal Lahir</td>
-					<td>: <input type="date" name="tgllahir" value="<?php echo $data['tgllahir']; ?>"></td>
+					<td>: <input type="date" name="tgllahir" value="<?= $data['tgllahir']; ?>"></td>
 				</tr>
 				<tr>
 					<td>Agama</td>
 					<td>: <select name="agama">
 							<?php
 							foreach ($agama as $a){
-							echo "<option value='$a' ";
-							echo $data['agama']==$a?'selected="selected"':'';
-							echo ">$a</option>";
+								echo "<option value='$a' ";
+								echo $data['agama']==$a?'selected="selected"':'';
+								echo ">$a</option>";
 							}
 							?>
 						  </select></td>
@@ -99,7 +107,6 @@ require_once 'template/header.php';
 			</table>
 		</div>
 	</form>
-<?php endwhile;?>
 </div>
 </div>
 </body>

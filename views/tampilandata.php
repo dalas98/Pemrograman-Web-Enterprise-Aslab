@@ -39,26 +39,29 @@ if (!isset($_SESSION['username'])) {
 						</tr>
 					</thead>
 					<?php 
-						$sql = "SELECT * FROM tb_datapenduduk";
-						$query = mysqli_query($connect,$sql);
+						$sql = $connect->query("SELECT * FROM tb_datapenduduk");
+						
+						$data = $sql->fetch_all(MYSQLI_ASSOC);
+						
+						$sql->close();
+						$connect->close();
 					?>
 					<tbody>
-						<?php while($data = mysqli_fetch_assoc($query)) : ?>
+						<?php foreach ($data as $key => $value) : ?>
 							<tr>
-								<td><?php echo $data['nik']; ?></td>
-								<td><?php echo $data['nama']; ?></td>
-								<td><?php echo $data['alamat']; ?></td>
-								<td><?php echo $data['tmptlahir']; ?>, <?php $ttt = $data['tgllahir']; echo date("d-M-Y", strtotime($ttt))?></td>
-								<td><?php echo $data['agama']; ?></td>
-								<td><?php echo $data['status']; ?></td>
-								<td><?php echo $data['warga']; ?></td>
+								<td><?= $value['nik']; ?></td>
+								<td><?= $value['nama']; ?></td>
+								<td><?= $value['alamat']; ?></td>
+								<td><?= $value['tmptlahir']; ?>, <?= date("d-M-Y", strtotime($value['tgllahir']))?></td>
+								<td><?= $value['agama']; ?></td>
+								<td><?= $value['status']; ?></td>
+								<td><?= $value['warga']; ?></td>
 								<td class="text-center">
-									<!-- <a href="#edit" title="Edit Data" data-toggle="modal" class="btn btn-default btn-s"><span class="fa fa-pencil"> Edit</span></a> -->
-									<a href="edit.php?nik=<?php echo $data['nik']; ?>" title="Edit Data" data-toggle="tooltip" class="btn btn-default btn-s"><span class="fa fa-pencil"> Edit</span></a>
-									<a href="../function/delete.php?nik=<?php echo $data['nik']; ?>" onclick="return confirm('Data <?php echo $data['nama']; ?> Akan Dihapus');" title="Hapus Data" data-toggle="tooltip" class="btn btn-danger btn-s"><span class="fa fa-trash"> Delete</span></a>
+									<a href="edit.php?nik=<?= $value['nik']; ?>" title="Edit Data" data-toggle="tooltip" class="btn btn-default btn-s"><span class="fa fa-pencil"> Edit</span></a>
+									<a href="../function/delete.php?nik=<?= $value['nik']; ?>" onclick="return confirm('Data <?= $data['nama']; ?> Akan Dihapus');" title="Hapus Data" data-toggle="tooltip" class="btn btn-danger btn-s"><span class="fa fa-trash"> Delete</span></a>
 								</td>
 							</tr>
-						<?php endwhile; ?>
+						<?php endforeach; ?>
 					</tbody>
 				</table>
 			</div>
@@ -91,7 +94,7 @@ if (!isset($_SESSION['username'])) {
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
 					</div>
 		            </div>
 			</div>
