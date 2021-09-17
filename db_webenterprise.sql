@@ -46,9 +46,7 @@ CREATE TABLE `tb_datapenduduk` (
 --
 
 INSERT INTO `tb_datapenduduk` (`nik`, `nama`, `alamat`, `tmptlahir`, `tgllahir`, `agama`, `status`, `warga`) VALUES
-('3671080302980001', 'Anik Putri', 'Pasar Baru', 'Tangerang', '1997-06-22', 'Islam', 'Belum Kawin', 'WNI'),
-('3671080302990001', 'Yusuf Farhan Hasbullah', 'Griya Sangiang Mas Blok Ka. 6 No. 11', 'Tangerang', '1999-02-03', 'Islam', 'Belum Kawin', 'WNI'),
-('3671082206970001', 'Yoga Styapratama', 'Perum Taman Walet', 'Kuningan', '1997-06-22', 'Islam', 'Belum Kawin', 'WNI');
+('3628020101880001','Jhon Doe','Lorem Ipsum','Los Angeles','2000-10-03','Islam','Kawin','WNI');
 
 -- --------------------------------------------------------
 
